@@ -15,6 +15,9 @@
 @property (nonatomic,strong) UIButton *btnImageAndVideo;
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,strong) UILabel *labelDescription;
+
+@property (nonatomic, strong) NSMutableArray *array;
+
 @end
 
 @implementation uzysViewController
@@ -63,6 +66,8 @@
     frame.origin.y = frame.origin.y + 40;
     self.btnImageAndVideo.frame = frame;
     [self.view addSubview:self.btnImageAndVideo];
+	
+	_array = [NSMutableArray array];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -78,10 +83,11 @@
     NSLog(@"sender %@",sender);
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
+	picker.selectedAssets = _array;
     if([sender isEqual:self.btnImage])
     {
         picker.maximumNumberOfSelectionVideo = 0;
-        picker.maximumNumberOfSelectionPhoto = 3;
+        picker.maximumNumberOfSelectionPhoto = 8;
     }
     else if([sender isEqual:self.btnVideo])
     {

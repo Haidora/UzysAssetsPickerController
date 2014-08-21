@@ -10,6 +10,7 @@
                 <outlet property="btnCamera" destination="8h0-kN-iqH" id="BN1-UZ-Qbu"/>
                 <outlet property="btnDone" destination="abt-dZ-axW" id="2rA-uc-JhG"/>
                 <outlet property="btnTitle" destination="rd5-Z7-vdI" id="cgS-pE-KEI"/>
+                <outlet property="collectionView" destination="1tm-gh-Vv0" id="Rr1-rr-1Sx"/>
                 <outlet property="labelSelectedMedia" destination="HUE-lo-MS3" id="SFl-yr-V8h"/>
                 <outlet property="navigationTop" destination="eF0-Xh-u5U" id="gxF-h7-gEE"/>
                 <outlet property="segmentedControl" destination="44q-K1-3XI" id="15T-I7-UsW"/>
@@ -49,6 +50,17 @@
                     </subviews>
                     <color key="backgroundColor" red="0.90588235294117647" green="0.90588235294117647" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="1tm-gh-Vv0">
+                    <rect key="frame" x="0.0" y="64" width="320" height="456"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8LX-VZ-xv3">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                </collectionView>
                 <view tag="201" contentMode="scaleToFill" id="kxD-PY-Oat" userLabel="BottomView">
                     <rect key="frame" x="0.0" y="520" width="320" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>

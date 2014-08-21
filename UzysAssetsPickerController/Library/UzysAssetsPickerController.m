@@ -10,6 +10,7 @@
 #import "UzysWrapperPickerController.h"
 #import "UzysGroupPickerView.h"
 #import "UzysGroupPickerViewController.h"
+#import <MBProgressHUD.h>
 
 
 @interface UzysAssetsPickerController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -23,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnCamera;
 
 @property (nonatomic, strong) UIView *noAssetView;
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) UzysWrapperPickerController *picker;
 @property (nonatomic, strong) UzysGroupPickerView *groupPicker;
 //@property (nonatomic, strong) UzysGroupPickerViewController *groupPicker;
@@ -97,6 +98,13 @@
     [self setupGroupPickerview];
     [self initNoAssetView];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)_selectedAssets.count] forState:UIControlStateNormal];
+}
+
 - (void)initVariable
 {
     self.assetsFilter = [ALAssetsFilter allPhotos];
@@ -112,10 +120,16 @@
     picker.videoQuality = UIImagePickerControllerQualityTypeHigh;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        picker.mediaTypes =
-        [UIImagePickerController availableMediaTypesForSourceType:
-         UIImagePickerControllerSourceTypeCamera];
+		if (self.maximumNumberOfSelectionPhoto)
+		{
+			picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+		}
+		if (self.maximumNumberOfSelectionVideo >0)
+		{
+			picker.mediaTypes =
+			[UIImagePickerController availableMediaTypesForSourceType:
+			 UIImagePickerControllerSourceTypeCamera];
+		}
     }
     self.picker = picker;
 }
@@ -239,7 +253,8 @@
     layout.minimumInteritemSpacing      = 1.0;
     layout.minimumLineSpacing           = 1.0;
 
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.bounds.size.height - 64 -48) collectionViewLayout:layout];
+//    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, 320, self.view.bounds.size.height - 64 -48) collectionViewLayout:layout];
+	self.collectionView.collectionViewLayout = layout;
     self.collectionView.allowsMultipleSelection = YES;
     [self.collectionView registerClass:[UzysAssetsViewCell class]
             forCellWithReuseIdentifier:kAssetsViewCellIdentifier];
@@ -250,7 +265,7 @@
     self.collectionView.bounces = YES;
     self.collectionView.alwaysBounceVertical = YES;
     
-    [self.view insertSubview:self.collectionView atIndex:0];
+//    [self.view insertSubview:self.collectionView atIndex:0];
 }
 
 - (void)changeGroup:(NSInteger)item filter:(ALAssetsFilter *)filter
@@ -385,13 +400,14 @@
 - (void)reloadData
 {
     [self.collectionView reloadData];
-    [self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)self.collectionView.indexPathsForSelectedItems
+    [self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)_selectedAssets
                             .count] forState:UIControlStateNormal];
     [self showNoAssetsIfNeeded];
 }
 - (void)setAssetsCountWithSelectedIndexPaths:(NSArray *)indexPaths
 {
-    [self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)indexPaths.count] forState:UIControlStateNormal];
+    [self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)_selectedAssets.count]
+				  forState:UIControlStateNormal];
 }
 
 
@@ -527,8 +543,20 @@
     
     UzysAssetsViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    [cell applyData:[self.assets objectAtIndex:indexPath.row]];
-    
+	ALAsset *asset = [self.assets objectAtIndex:indexPath.row];
+    [cell applyData:asset];
+	
+	//http://stackoverflow.com/questions/15330844/uicollectionview-select-and-deselect-issue
+	if ([_selectedAssets containsObject:asset.defaultRepresentation.url])
+	{
+		[cell setSelected:YES];
+		[collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+	}
+	else
+	{
+		[cell setSelected:NO];
+		[collectionView deselectItemAtIndexPath:indexPath animated:YES];
+	}
     return cell;
 }
 
@@ -536,7 +564,26 @@
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ([collectionView indexPathsForSelectedItems].count < self.maximumNumberOfSelection);
+	BOOL result = (_selectedAssets.count < self.maximumNumberOfSelection);
+	if (_selectedAssets.count < self.maximumNumberOfSelection)
+	{
+		ALAsset *asset = [self.assets objectAtIndex:indexPath.row];
+		if (![_selectedAssets containsObject: asset.defaultRepresentation.url])
+		{
+			[_selectedAssets addObject:asset.defaultRepresentation.url];
+		}
+	}
+    return result;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+	ALAsset *asset = [self.assets objectAtIndex:indexPath.row];
+	if ([_selectedAssets containsObject: asset.defaultRepresentation.url])
+	{
+		[_selectedAssets removeObject:asset.defaultRepresentation.url];
+	}
+	return YES;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -697,16 +744,29 @@
             }
             else
             {
-//                [self initImagePicker];
-                __weak typeof(self) weakSelf = self;
-                [self presentViewController:self.picker animated:YES completion:^{
-                    //카메라 화면으로 가면 강제로 가메라 롤로 변경.
-                    if(![weakSelf.assetsGroup isEqual:weakSelf.groups[0]] )
-                    {
-                        weakSelf.assetsGroup = weakSelf.groups[0];
-                        [weakSelf changeGroup:0 filter:weakSelf.assetsFilter];
-                    }
-                }];
+				
+				if (_selectedAssets.count<self.maximumNumberOfSelection)
+				{
+					//                [self initImagePicker];
+					__weak typeof(self) weakSelf = self;
+					[self presentViewController:self.picker animated:YES completion:^{
+						//카메라 화면으로 가면 강제로 가메라 롤로 변경.
+						if(![weakSelf.assetsGroup isEqual:weakSelf.groups[0]] )
+						{
+							weakSelf.assetsGroup = weakSelf.groups[0];
+							[weakSelf changeGroup:0 filter:weakSelf.assetsFilter];
+						}
+					}];
+				}
+				else
+				{
+					UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示"
+																	   message:[NSString stringWithFormat:@"最多只能选择%d张照片!",self.maximumNumberOfSelection]
+																	  delegate:nil
+															 cancelButtonTitle:@"确定"
+															 otherButtonTitles: nil];
+					[alertView show];
+				}
             }
         }
             break;
@@ -752,38 +812,47 @@
 #pragma mark - UIImagerPickerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    __weak typeof(self) weakSelf = self;
-    //사진 촬영 시
-    if (CFStringCompare((CFStringRef) [info objectForKey:UIImagePickerControllerMediaType], kUTTypeImage, 0) == kCFCompareEqualTo)
-    {
-        if(self.segmentedControl.selectedSegmentIndex ==1)
-        {
-            self.segmentedControl.selectedSegmentIndex = 0;
-            self.maximumNumberOfSelection = weakSelf.maximumNumberOfSelectionPhoto;
-            if(self.segmentedControl.hidden ==NO)
-                self.assetsFilter = [ALAssetsFilter allPhotos];
-        }
-            UIImage *image = info[UIImagePickerControllerOriginalImage];
-            [self.assetsLibrary writeImageToSavedPhotosAlbum:image.CGImage metadata:info[UIImagePickerControllerMediaMetadata] completionBlock:^(NSURL *assetURL, NSError *error) {
-                NSLog(@"writeImageToSavedPhotosAlbum");
-            }];
-    }
-    else //비디오 촬영시
-    {
-        if(self.segmentedControl.selectedSegmentIndex ==0)
-        {
-            self.segmentedControl.selectedSegmentIndex = 1;
-            self.maximumNumberOfSelection = self.maximumNumberOfSelectionVideo;
-            if(self.segmentedControl.hidden ==NO)
-                self.assetsFilter = [ALAssetsFilter allVideos];
-        }
-            [self.assetsLibrary writeVideoAtPathToSavedPhotosAlbum:info[UIImagePickerControllerMediaURL] completionBlock:^(NSURL *assetURL, NSError *error) {
-
-            }];
-    }
-    [picker dismissViewControllerAnimated:YES completion:^{}];
-
-    
+	[picker dismissViewControllerAnimated:YES completion:^
+	{
+		[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+					   {
+						   __weak typeof(self) weakSelf = self;
+						   //사진 촬영 시
+						   if (CFStringCompare((CFStringRef) [info objectForKey:UIImagePickerControllerMediaType], kUTTypeImage, 0) == kCFCompareEqualTo)
+						   {
+							   if(self.segmentedControl.selectedSegmentIndex ==1)
+							   {
+								   self.segmentedControl.selectedSegmentIndex = 0;
+								   self.maximumNumberOfSelection = weakSelf.maximumNumberOfSelectionPhoto;
+								   if(self.segmentedControl.hidden ==NO)
+									   self.assetsFilter = [ALAssetsFilter allPhotos];
+							   }
+							   UIImage *image = info[UIImagePickerControllerOriginalImage];
+							   [self.assetsLibrary writeImageToSavedPhotosAlbum:image.CGImage metadata:info[UIImagePickerControllerMediaMetadata] completionBlock:^(NSURL *assetURL, NSError *error) {
+								   NSLog(@"writeImageToSavedPhotosAlbum");
+								   [_selectedAssets addObject:assetURL];
+								   dispatch_async(dispatch_get_main_queue(), ^
+												  {
+													  [MBProgressHUD hideHUDForView:self.view animated:YES];
+												  });
+							   }];
+						   }
+						   else //비디오 촬영시
+						   {
+							   if(self.segmentedControl.selectedSegmentIndex ==0)
+							   {
+								   self.segmentedControl.selectedSegmentIndex = 1;
+								   self.maximumNumberOfSelection = self.maximumNumberOfSelectionVideo;
+								   if(self.segmentedControl.hidden ==NO)
+									   self.assetsFilter = [ALAssetsFilter allVideos];
+							   }
+							   [self.assetsLibrary writeVideoAtPathToSavedPhotosAlbum:info[UIImagePickerControllerMediaURL] completionBlock:^(NSURL *assetURL, NSError *error) {
+								   
+							   }];
+						   }
+					   });
+	}];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {

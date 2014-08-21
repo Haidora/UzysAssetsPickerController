@@ -16,6 +16,8 @@
 @end
 
 @interface UzysAssetsPickerController : UIViewController
+
+@property (nonatomic, strong) NSMutableArray *selectedAssets;
 @property (nonatomic, strong) ALAssetsFilter *assetsFilter;
 @property (nonatomic, assign) NSInteger maximumNumberOfSelectionVideo;
 @property (nonatomic, assign) NSInteger maximumNumberOfSelectionPhoto;
