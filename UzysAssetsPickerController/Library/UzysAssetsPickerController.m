@@ -103,6 +103,7 @@
 {
 	[super viewWillAppear:animated];
 	[self.btnDone setTitle:[NSString stringWithFormat:@"%lu",(unsigned long)_selectedAssets.count] forState:UIControlStateNormal];
+	[self.collectionView reloadData];
 }
 
 - (void)initVariable
@@ -547,7 +548,7 @@
     [cell applyData:asset];
 	
 	//http://stackoverflow.com/questions/15330844/uicollectionview-select-and-deselect-issue
-	if ([_selectedAssets containsObject:asset.defaultRepresentation.url])
+	if ([_selectedAssets containsObject:asset])
 	{
 		[cell setSelected:YES];
 		[collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
@@ -568,9 +569,9 @@
 	if (_selectedAssets.count < self.maximumNumberOfSelection)
 	{
 		ALAsset *asset = [self.assets objectAtIndex:indexPath.row];
-		if (![_selectedAssets containsObject: asset.defaultRepresentation.url])
+		if (![_selectedAssets containsObject: asset])
 		{
-			[_selectedAssets addObject:asset.defaultRepresentation.url];
+			[_selectedAssets addObject:asset];
 		}
 	}
     return result;
@@ -579,9 +580,9 @@
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	ALAsset *asset = [self.assets objectAtIndex:indexPath.row];
-	if ([_selectedAssets containsObject: asset.defaultRepresentation.url])
+	if ([_selectedAssets containsObject: asset])
 	{
-		[_selectedAssets removeObject:asset.defaultRepresentation.url];
+		[_selectedAssets removeObject:asset];
 	}
 	return YES;
 }
@@ -774,7 +775,7 @@
         {
             if([self.delegate respondsToSelector:@selector(UzysAssetsPickerControllerDidCancel:)])
             {
-                
+                [self.delegate UzysAssetsPickerControllerDidCancel:self];
             }
             [self dismissViewControllerAnimated:YES completion:^{
                 
