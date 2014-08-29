@@ -657,6 +657,7 @@
             if(updatedAssets.count  <2 && updatedAssetGroup.count ==0 && deletedAssetGroup.count == 0 && insertedAssetGroup.count == 0) //이미지픽커에서 앨범에 저장할 경우.
             {
                 [self.assetsLibrary assetForURL:[updatedAssets allObjects][0] resultBlock:^(ALAsset *asset) {
+					[self.selectedAssets addObject:asset];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if([[[self.assets[0] valueForProperty:ALAssetPropertyAssetURL] absoluteString] isEqualToString:[[asset valueForProperty:ALAssetPropertyAssetURL] absoluteString]])
                         {
@@ -832,7 +833,6 @@
 							   UIImage *image = info[UIImagePickerControllerOriginalImage];
 							   [self.assetsLibrary writeImageToSavedPhotosAlbum:image.CGImage metadata:info[UIImagePickerControllerMediaMetadata] completionBlock:^(NSURL *assetURL, NSError *error) {
 								   NSLog(@"writeImageToSavedPhotosAlbum");
-								   [_selectedAssets addObject:assetURL];
 								   dispatch_async(dispatch_get_main_queue(), ^
 												  {
 													  [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -883,6 +883,19 @@
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationPortrait;
+}
+
+@end
+
+@interface ALAsset(Equal)
+
+@end
+
+@implementation ALAsset (Equal)
+
+-(BOOL)isEqual:(id)object
+{
+	return [((ALAsset *)object).defaultRepresentation.url.absoluteString isEqualToString:self.defaultRepresentation.url.absoluteString];
 }
 
 @end
