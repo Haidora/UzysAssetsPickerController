@@ -1,11 +1,14 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, "6.0"
+# platform :ios, '6.0'
 
-target "UzysAssetsPickerController" do
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'UzysAssetsPickerController' do
 pod 'MBProgressHUD', '~> 0.8'
+
 end
 
-target "UzysAssetsPickerControllerTests" do
-
+target 'UzysAssetsPickerControllerTests' do
+pod 'MBProgressHUD', '~> 0.8'
 end
 

@@ -15,9 +15,6 @@
 @property (nonatomic,strong) UIButton *btnImageAndVideo;
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,strong) UILabel *labelDescription;
-
-@property (nonatomic, strong) NSMutableArray *array;
-
 @end
 
 @implementation uzysViewController
@@ -31,6 +28,7 @@
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 50, 200, 200)];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView.backgroundColor = [UIColor lightGrayColor];
+    self.imageView.center = CGPointMake(self.view.center.x, self.imageView.center.y);
     [self.view addSubview:self.imageView];
 
     self.labelDescription = [[UILabel alloc] initWithFrame:CGRectMake(60, 260, 200, 20)];
@@ -44,6 +42,7 @@
     [self.btnImage setTitle:@"Image Only" forState:UIControlStateNormal];
     [self.btnImage addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     self.btnImage.frame = frame;
+    self.btnImage.center = CGPointMake(self.view.center.x, self.btnImage.center.y);
     [self.view addSubview:self.btnImage];
     
     self.btnVideo = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -51,6 +50,7 @@
     [self.btnVideo addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     frame.origin.y = frame.origin.y + 40;
     self.btnVideo.frame = frame;
+    self.btnVideo.center = CGPointMake(self.view.center.x, self.btnVideo.center.y);
     [self.view addSubview:self.btnVideo];
     
     self.btnImageOrVideo = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -58,6 +58,7 @@
     [self.btnImageOrVideo addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     frame.origin.y = frame.origin.y + 40;
     self.btnImageOrVideo.frame = frame;
+    self.btnImageOrVideo.center = CGPointMake(self.view.center.x, self.btnImageOrVideo.center.y);
     [self.view addSubview:self.btnImageOrVideo];
     
     self.btnImageAndVideo = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -65,9 +66,8 @@
     [self.btnImageAndVideo addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
     frame.origin.y = frame.origin.y + 40;
     self.btnImageAndVideo.frame = frame;
+    self.btnImageAndVideo.center = CGPointMake(self.view.center.x, self.btnImageAndVideo.center.y);
     [self.view addSubview:self.btnImageAndVideo];
-	
-	_array = [NSMutableArray array];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -80,14 +80,20 @@
 }
 - (void)btnAction:(id)sender
 {
-    NSLog(@"sender %@",sender);
+    //if you want to checkout how to config appearance, just uncomment the following 4 lines code.
+#if 0
+    UzysAppearanceConfig *appearanceConfig = [[UzysAppearanceConfig alloc] init];
+    appearanceConfig.finishSelectionButtonColor = [UIColor blueColor];
+    appearanceConfig.assetsGroupSelectedImageName = @"checker.png";
+    [UzysAssetsPickerController setUpAppearanceConfig:appearanceConfig];
+#endif
+
     UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
     picker.delegate = self;
-	picker.selectedAssets = _array;
     if([sender isEqual:self.btnImage])
     {
         picker.maximumNumberOfSelectionVideo = 0;
-        picker.maximumNumberOfSelectionPhoto = 8;
+        picker.maximumNumberOfSelectionPhoto = 3;
     }
     else if([sender isEqual:self.btnVideo])
     {
@@ -108,10 +114,12 @@
     }];
 
 }
+
+#pragma mark - UzysAssetsPickerControllerDelegate methods
 - (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
 {
     self.imageView.backgroundColor = [UIColor clearColor];
-    NSLog(@"assets %@",assets);
+    DLog(@"assets %@",assets);
     if(assets.count ==1)
     {
         self.labelDescription.text = [NSString stringWithFormat:@"%ld asset selected",(unsigned long)assets.count];
@@ -160,12 +168,22 @@
             
             if (session.status == AVAssetExportSessionStatusCompleted)
             {
-                NSLog(@"output Video URL %@",uploadURL);
+                DLog(@"output Video URL %@",uploadURL);
             }
             
         }];
         
     }
     
+}
+
+- (void)UzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Exceed Maximum Number Of Selection"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 @end

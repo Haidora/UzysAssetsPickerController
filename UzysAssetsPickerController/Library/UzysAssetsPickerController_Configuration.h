@@ -25,3 +25,20 @@ typedef void (^voidBlock)(void);
 #define kTagNoAssetViewMsgLabel 32
 
 #define kGroupPickerViewCellLength 90
+
+
+
+#ifdef DEBUG
+// for debug mode
+#ifndef DLog
+#define DLog(f, ...) NSLog(f, ##__VA_ARGS__)
+#endif
+
+#else
+
+// for release mode
+#ifndef DLog
+#define DLog(f, ...) /* noop */
+#endif
+
+#endif

@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "UzysAssetsPickerController_Configuration.h"
+#import "UzysAppearanceConfig.h"
+
 @class UzysAssetsPickerController;
 @protocol UzysAssetsPickerControllerDelegate<NSObject>
 - (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets;
 @optional
 - (void)UzysAssetsPickerControllerDidCancel:(UzysAssetsPickerController *)picker;
+- (void)UzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker;
 @end
 
 @interface UzysAssetsPickerController : UIViewController
@@ -26,5 +29,11 @@
 
 @property (nonatomic, weak) id <UzysAssetsPickerControllerDelegate> delegate;
 + (ALAssetsLibrary *)defaultAssetsLibrary;
+/**
+ *  setup the appearance, including the all the properties in UzysAppearanceConfig, check UzysAppearanceConfig.h out for details.
+ *
+ *  @param config UzysAppearanceConfig instance.
+ */
++ (void)setUpAppearanceConfig:(UzysAppearanceConfig *)config;
 
 @end

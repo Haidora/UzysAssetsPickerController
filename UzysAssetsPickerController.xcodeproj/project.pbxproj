@@ -10,10 +10,169 @@
 	<string>46</string>
 	<key>objects</key>
 	<dict>
-		<key>86EBCF985708430BBFE7FD59</key>
+		<key>02ABB61A864DAB1B839E790C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-UzysAssetsPickerControllerTests/Pods-UzysAssetsPickerControllerTests-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>12C726FF9A8F3CF95165C8BA</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D31468C49065402FAF6B18AE</string>
+			<string>B2616C22EC0025CC4C8CEE62</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1D61A50B0E9AF234F371D693</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Check Pods Manifest.lock</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
+if [[ $? != 0 ]] ; then
+    cat &lt;&lt; EOM
+error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
+EOM
+    exit 1
+fi
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>21C2426E2E134FF6567D008B</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>4B6B2FFB8E1156FED0BF7B6D</string>
+				<string>2354A51FBF96BCB1F3E9C63B</string>
+				<string>6BA63138E0559094AFD11870</string>
+				<string>B637E9012E95FC27057E1833</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2354A51FBF96BCB1F3E9C63B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-UzysAssetsPickerController.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-UzysAssetsPickerController/Pods-UzysAssetsPickerController.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4B6B2FFB8E1156FED0BF7B6D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-UzysAssetsPickerController.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-UzysAssetsPickerController/Pods-UzysAssetsPickerController.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>67AF96F10ED1336ABDA3F939</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array/>
+			<key>inputPaths</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXShellScriptBuildPhase</string>
+			<key>name</key>
+			<string>Copy Pods Resources</string>
+			<key>outputPaths</key>
+			<array/>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+			<key>shellPath</key>
+			<string>/bin/sh</string>
+			<key>shellScript</key>
+			<string>"${SRCROOT}/Pods/Target Support Files/Pods-UzysAssetsPickerController/Pods-UzysAssetsPickerController-resources.sh"
+</string>
+			<key>showEnvVarsInLog</key>
+			<string>0</string>
+		</dict>
+		<key>6BA63138E0559094AFD11870</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-UzysAssetsPickerControllerTests.debug.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-UzysAssetsPickerControllerTests/Pods-UzysAssetsPickerControllerTests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>95080AE319CC508900E69F29</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>path</key>
+			<string>Launch Screen.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>95080AE419CC508900E69F29</key>
+		<dict>
+			<key>fileRef</key>
+			<string>95080AE319CC508900E69F29</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -59,11 +218,12 @@
 		<dict>
 			<key>children</key>
 			<array>
+				<string>95080AE319CC508900E69F29</string>
 				<string>95F4436418AB4AEF0088FC13</string>
 				<string>95F4438318AB4AEF0088FC13</string>
 				<string>95F4435D18AB4AEF0088FC13</string>
 				<string>95F4435C18AB4AEF0088FC13</string>
-				<string>9AAD1FC4E76046F78CECD451</string>
+				<string>21C2426E2E134FF6567D008B</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -140,14 +300,15 @@
 			<string>2147483647</string>
 			<key>files</key>
 			<array>
+				<string>CCE0A1C819AC1F0200A5BE3A</string>
 				<string>95F4439D18AB57B30088FC13</string>
 				<string>95F4436B18AB4AEF0088FC13</string>
+				<string>CCE0A1C519AC197F00A5BE3A</string>
 				<string>95F443BF18AC606B0088FC13</string>
 				<string>95F4437518AB4AEF0088FC13</string>
 				<string>95F443B318AB716E0088FC13</string>
 				<string>95F4436F18AB4AEF0088FC13</string>
 				<string>95F4439718AB4BBA0088FC13</string>
-				<string>95F443C518ACA0470088FC13</string>
 				<string>95F443C218AC62D10088FC13</string>
 			</array>
 			<key>isa</key>
@@ -167,7 +328,7 @@
 				<string>95F4436118AB4AEF0088FC13</string>
 				<string>95F4436318AB4AEF0088FC13</string>
 				<string>95F4435F18AB4AEF0088FC13</string>
-				<string>86EBCF985708430BBFE7FD59</string>
+				<string>D4A6BC38B32E1B150327FEB6</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -185,6 +346,7 @@
 				<string>95F4437218AB4AEF0088FC13</string>
 				<string>953E13B719A2CAE30012B4D9</string>
 				<string>95F4439818AB4BBA0088FC13</string>
+				<string>95080AE419CC508900E69F29</string>
 			</array>
 			<key>isa</key>
 			<string>PBXResourcesBuildPhase</string>
@@ -197,11 +359,11 @@
 			<string>95F4438D18AB4AEF0088FC13</string>
 			<key>buildPhases</key>
 			<array>
-				<string>991244FCF0CE42F386AC4BAD</string>
+				<string>EF7941054C9430AC24F26E49</string>
 				<string>95F4435718AB4AEF0088FC13</string>
 				<string>95F4435818AB4AEF0088FC13</string>
 				<string>95F4435918AB4AEF0088FC13</string>
-				<string>ABD1A84E330A450B92A950C3</string>
+				<string>67AF96F10ED1336ABDA3F939</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -256,7 +418,8 @@
 				<string>95F4436018AB4AEF0088FC13</string>
 				<string>95F4436218AB4AEF0088FC13</string>
 				<string>95F4437D18AB4AEF0088FC13</string>
-				<string>D31468C49065402FAF6B18AE</string>
+				<string>AA4BE5EFFD8658F067BC3623</string>
+				<string>B2616C22EC0025CC4C8CEE62</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -513,10 +676,14 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>lineEnding</key>
+			<string>0</string>
 			<key>path</key>
 			<string>uzysViewController.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.objc</string>
 		</dict>
 		<key>95F4437518AB4AEF0088FC13</key>
 		<dict>
@@ -565,6 +732,7 @@
 				<string>95F4437E18AB4AEF0088FC13</string>
 				<string>95F4438018AB4AEF0088FC13</string>
 				<string>95F4437F18AB4AEF0088FC13</string>
+				<string>12C726FF9A8F3CF95165C8BA</string>
 			</array>
 			<key>isa</key>
 			<string>PBXFrameworksBuildPhase</string>
@@ -590,9 +758,11 @@
 			<string>95F4439018AB4AEF0088FC13</string>
 			<key>buildPhases</key>
 			<array>
+				<string>1D61A50B0E9AF234F371D693</string>
 				<string>95F4437818AB4AEF0088FC13</string>
 				<string>95F4437918AB4AEF0088FC13</string>
 				<string>95F4437A18AB4AEF0088FC13</string>
+				<string>02ABB61A864DAB1B839E790C</string>
 			</array>
 			<key>buildRules</key>
 			<array/>
@@ -920,7 +1090,7 @@
 		<key>95F4438E18AB4AEF0088FC13</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>9AAD1FC4E76046F78CECD451</string>
+			<string>4B6B2FFB8E1156FED0BF7B6D</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
@@ -948,7 +1118,7 @@
 		<key>95F4438F18AB4AEF0088FC13</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>9AAD1FC4E76046F78CECD451</string>
+			<string>2354A51FBF96BCB1F3E9C63B</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
@@ -989,6 +1159,8 @@
 		</dict>
 		<key>95F4439118AB4AEF0088FC13</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>6BA63138E0559094AFD11870</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
@@ -1024,6 +1196,8 @@
 		</dict>
 		<key>95F4439218AB4AEF0088FC13</key>
 		<dict>
+			<key>baseConfigurationReference</key>
+			<string>B637E9012E95FC27057E1833</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>BUNDLE_LOADER</key>
@@ -1065,8 +1239,10 @@
 				<string>95F443A318AB5C0D0088FC13</string>
 				<string>95F4439B18AB57B30088FC13</string>
 				<string>95F4439C18AB57B30088FC13</string>
-				<string>95F443C318ACA0470088FC13</string>
-				<string>95F443C418ACA0470088FC13</string>
+				<string>CCE0A1C319AC197F00A5BE3A</string>
+				<string>CCE0A1C419AC197F00A5BE3A</string>
+				<string>CCE0A1C619AC1F0200A5BE3A</string>
+				<string>CCE0A1C719AC1F0200A5BE3A</string>
 				<string>95F443BD18AC606B0088FC13</string>
 				<string>95F443BE18AC606B0088FC13</string>
 				<string>95F443C018AC62D10088FC13</string>
@@ -1100,10 +1276,14 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>lineEnding</key>
+			<string>0</string>
 			<key>path</key>
 			<string>UzysAssetsPickerController.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.objc</string>
 		</dict>
 		<key>95F4439618AB4BBA0088FC13</key>
 		<dict>
@@ -1303,10 +1483,14 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>lineEnding</key>
+			<string>0</string>
 			<key>path</key>
 			<string>UzysGroupViewCell.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.objc</string>
 		</dict>
 		<key>95F443C218AC62D10088FC13</key>
 		<dict>
@@ -1315,7 +1499,48 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>95F443C318ACA0470088FC13</key>
+		<key>AA4BE5EFFD8658F067BC3623</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-UzysAssetsPickerController.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>B2616C22EC0025CC4C8CEE62</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>libPods-UzysAssetsPickerControllerTests.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>B637E9012E95FC27057E1833</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>name</key>
+			<string>Pods-UzysAssetsPickerControllerTests.release.xcconfig</string>
+			<key>path</key>
+			<string>Pods/Target Support Files/Pods-UzysAssetsPickerControllerTests/Pods-UzysAssetsPickerControllerTests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CCE0A1C319AC197F00A5BE3A</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -1324,11 +1549,11 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>UzysGroupPickerViewController.h</string>
+			<string>UIImage+UzysExtension.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>95F443C418ACA0470088FC13</key>
+		<key>CCE0A1C419AC197F00A5BE3A</key>
 		<dict>
 			<key>fileEncoding</key>
 			<string>4</string>
@@ -1337,18 +1562,66 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
 			<key>path</key>
-			<string>UzysGroupPickerViewController.m</string>
+			<string>UIImage+UzysExtension.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>95F443C518ACA0470088FC13</key>
+		<key>CCE0A1C519AC197F00A5BE3A</key>
 		<dict>
 			<key>fileRef</key>
-			<string>95F443C418ACA0470088FC13</string>
+			<string>CCE0A1C419AC197F00A5BE3A</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>991244FCF0CE42F386AC4BAD</key>
+		<key>CCE0A1C619AC1F0200A5BE3A</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>lineEnding</key>
+			<string>0</string>
+			<key>path</key>
+			<string>UzysAppearanceConfig.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.objcpp</string>
+		</dict>
+		<key>CCE0A1C719AC1F0200A5BE3A</key>
+		<dict>
+			<key>fileEncoding</key>
+			<string>4</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>lineEnding</key>
+			<string>0</string>
+			<key>path</key>
+			<string>UzysAppearanceConfig.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.objc</string>
+		</dict>
+		<key>CCE0A1C819AC1F0200A5BE3A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CCE0A1C719AC1F0200A5BE3A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D4A6BC38B32E1B150327FEB6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AA4BE5EFFD8658F067BC3623</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>EF7941054C9430AC24F26E49</key>
 		<dict>
 			<key>buildActionMask</key>
 			<string>2147483647</string>
@@ -1377,58 +1650,6 @@ fi
 </string>
 			<key>showEnvVarsInLog</key>
 			<string>0</string>
-		</dict>
-		<key>9AAD1FC4E76046F78CECD451</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-UzysAssetsPickerController.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Pods-UzysAssetsPickerController.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>ABD1A84E330A450B92A950C3</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Pods-UzysAssetsPickerController-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>D31468C49065402FAF6B18AE</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods-UzysAssetsPickerController.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>
