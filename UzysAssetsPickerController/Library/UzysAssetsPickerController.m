@@ -947,6 +947,11 @@
                 {
                     NSIndexPath *newPath = [NSIndexPath indexPathForRow:0 inSection:0];
                     [self.collectionView selectItemAtIndexPath:newPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+                    ALAsset *asset = [self.assets objectAtIndex:newPath.row];
+                    if (![_selectedAssets containsObject: asset])
+                    {
+                        [_selectedAssets addObject:asset];
+                    }
                 }
                 [self setAssetsCountWithSelectedIndexPaths:self.collectionView.indexPathsForSelectedItems];
             }
